@@ -1,36 +1,54 @@
-import React from 'react'
-import { Input } from '@nextui-org/react'
-import { Textarea } from '@nextui-org/react'
+import Reac, { useState } from 'react'
+import InfoBasic from './InfoBasic/InfoBasic'
+import Desciption from './Description/Desciption'
+import Culture from './Culture/Culture'
+import Activitys from './Activitys/Activitys'
+import Notes from './Notes/Notes'
+import Multimedia from './Multimedia/Multimedia'
 
 export default function Form () {
-  const variants: ['underlined' | 'flat' | 'faded' | 'bordered' | undefined] = [
-    'underlined'
-  ]
+  const [currentStep, setCurrentStep] = useState(1)
+
+  const handleNext = () => {
+    setCurrentStep(currentStep + 1)
+  }
+
+  const renderStep = () => {
+    switch (currentStep) {
+      case 1:
+        return <InfoBasic />
+      case 2:
+        return <Desciption />
+      case 3:
+        return <Culture />
+      case 4:
+        return <Notes />
+      case 5:
+        return <Activitys />
+      case 6:
+        return <Multimedia />
+      default:
+        return null
+    }
+  }
+
   return (
-    <form>
-      <div className='w-full flex flex-col gap-4'>
-        {variants.map(variant => (
-          <div
-            key={variant}
-            className='flex w-full flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4'
-          >
-            <Input type='email' variant={variant} label='Email' />
-            <Input
-              type='email'
-              variant={variant}
-              label='Email'
-              placeholder='Enter your email'
-            />
-            <Textarea
-              isRequired
-              label='Description'
-              labelPlacement='outside'
-              placeholder='Enter your description'
-              className='max-w-xs'
-            />
-          </div>
-        ))}
-      </div>
-    </form>
+    <div className='w-auto h-screen m-auto text-center justify-center'>
+      <h1>Crear Nueva Bitácora</h1>
+      <form>
+        {renderStep()}
+
+        {currentStep > 1 && (
+          <button onClick={() => setCurrentStep(currentStep - 1)}>
+            Anterior
+          </button>
+        )}
+        {currentStep < 5 ? (
+          <button onClick={handleNext}>Siguiente</button>
+        ) : (
+          <button type='submit'>Guardar Bitácora</button>
+        )}
+      </form>
+    </div>
   )
 }

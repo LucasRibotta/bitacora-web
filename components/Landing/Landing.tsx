@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
-import { Button } from '@nextui-org/react'
 import Image from 'next/image'
 import landingImg from '@/assets/Landing.jpg'
+import Login from '../Login/Login'
 
 export default function Landing () {
   return (
@@ -25,11 +25,7 @@ export default function Landing () {
         <Image src={landingImg} alt='imagen' width={300} height={200} />
       </div>
       <div className='m-auto mt-7'>
-        <a href='/login'>
-          <Button color='primary' variant='shadow'>
-            Ingreso
-          </Button>
-        </a>
+        <Login />
       </div>
     </div>
   )

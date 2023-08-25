@@ -3,7 +3,7 @@ import CardHome from '../Card/Card'
 
 export default function HomeSection() {
   return (
-    <div>
+    <div >
       <CardHome />
     </div>
   )

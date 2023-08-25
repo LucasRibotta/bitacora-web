@@ -1,5 +1,8 @@
 import React from 'react'
 import { usePathname } from 'next/navigation'
+import { auth } from '../../firebaseConfig'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { useRouter } from 'next/navigation';
 
 import {
   Navbar,
@@ -7,14 +10,24 @@ import {
   NavbarContent,
   NavbarItem,
   Link,
-  Button
+  Button,
 } from '@nextui-org/react'
 
 export default function NavBar () {
+  const [user] = useAuthState(auth)
+  const router = useRouter();
+
+  const logout = async () => {
+    try {
+      await auth.signOut()
+      router.push('/');
+    } catch (error) {
+      console.error('Error al cerrar sesión', error)
+    }
+  }
   const pathname = usePathname()
 
   if (pathname !== '/' && pathname !== '/login' && pathname !== '/register') {
-    
     return (
       <Navbar>
         <NavbarBrand>
@@ -31,22 +44,18 @@ export default function NavBar () {
               Agregar nueva bitacora
             </Link>
           </NavbarItem>
-          {/*         <NavbarItem>
-          <Link color='foreground' href='#'>
-            Integrations
-          </Link>
-        </NavbarItem> */}
         </NavbarContent>
-        {/*       <NavbarContent justify='end'>
-        <NavbarItem className='hidden lg:flex'>
-          <Link href='#'>Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color='primary' href='#' variant='flat'>
-            Sign Up
-          </Button>
-        </NavbarItem>
-      </NavbarContent> */}
+        <NavbarContent justify='end'>
+          <NavbarItem className='hidden lg:flex'>
+            {user ? (
+              <Button onClick={logout} variant='ghost'>
+                Cerrar sesión
+              </Button>
+            ) : (
+              <p>No has iniciado sesión.</p>
+            )}
+          </NavbarItem>
+        </NavbarContent>
       </Navbar>
     )
   }
