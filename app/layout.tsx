@@ -1,7 +1,9 @@
+'use client'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import {Providers} from "./providers";
+import NavBar from '@/components/NavBar/NavBar';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,6 +21,7 @@ export default function RootLayout({
     <html lang="es" className='dark'>
       <body className={inter.className}>
       <Providers>
+        <NavBar />
           {children}
         </Providers>
       </body>

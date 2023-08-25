@@ -1,7 +1,13 @@
 import React from 'react'
 
-export default function Mapa() {
+
+
+export default function Mapa () {
+  
   return (
-    <div>Mapa</div>
+    <div id="map">
+      <h2>MAPA</h2>
+      
+    </div>
   )
 }

@@ -1,9 +1,10 @@
+'use client'
+import Form from '@/components/Form/Form'
 import React from 'react'
 
 export default function form() {
   return (
-    <div>
-      <h2>formulario</h2>
-    </div>
+      <Form />
+    
   )
 }
