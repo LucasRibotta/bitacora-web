@@ -2,7 +2,8 @@
 import React from 'react'
 import Image from 'next/image'
 import landingImg from '@/assets/Landing.jpg'
-import Login from '../Login/Login'
+import { Button } from '@nextui-org/react'
+
 
 export default function Landing () {
   return (
@@ -25,7 +26,16 @@ export default function Landing () {
         <Image src={landingImg} alt='imagen' width={300} height={200} />
       </div>
       <div className='m-auto mt-7'>
-        <Login />
+      <a href='/community'>
+        <Button  color='primary' variant='ghost'>
+          Comunidad
+        </Button>
+      </a>
+      <a href='/login'>
+        <Button  color='primary' variant='ghost'>
+          Iniciar
+        </Button>
+      </a>
       </div>
     </div>
   )
