@@ -7,7 +7,7 @@ import { Button } from '@nextui-org/react'
 
 export default function Landing () {
   return (
-    <div className='flex flex-col justify-center text-center w-50 h-50 m-auto mt-5'>
+    <div className='flex flex-col h-screen w-auto justify-center text-center w-50 h-50 m-auto pt-5'>
       <h1 className='text-lg'>Bienvenidos a tu Bitacora Web</h1>
       <div className='flex flex-row  m-auto mt-7 space-x-2'>
         <p className='font-semibold text-base text-start m-auto mr-7 max-w-sm'>
@@ -26,11 +26,6 @@ export default function Landing () {
         <Image src={landingImg} alt='imagen' width={300} height={200} />
       </div>
       <div className='m-auto mt-7'>
-      <a href='/community'>
-        <Button  color='primary' variant='ghost'>
-          Comunidad
-        </Button>
-      </a>
       <a href='/login'>
         <Button  color='primary' variant='ghost'>
           Iniciar

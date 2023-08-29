@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from '@nextui-org/react'
 import { Input } from '@nextui-org/react'
-import { auth } from '../../firebaseConfig'
+import { auth, googleAuthProvider } from '../../firebaseConfig'
 import { EyeFilledIcon } from './password/EyeFilledIcon.jsx'
 import { EyeSlashFilledIcon } from './password/EyeSlashFilledIcon'
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
+import { signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRouter } from 'next/navigation'
 
 export default function Login () {
   const [user, loading, error] = useAuthState(auth)
-  const googleAuth = new GoogleAuthProvider()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const router = useRouter()
+
+  console.log(auth?.currentUser?.email)
 
   const variants: ['underlined' | 'bordered' | 'flat' | 'faded' | undefined] = [
     'underlined'
@@ -19,7 +22,15 @@ export default function Login () {
 
   const loginAuth = async () => {
     try {
-      const result = await signInWithPopup(auth, googleAuth)
+      await signInWithPopup(auth, googleAuthProvider)
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error)
+    }
+  }
+
+  const signIn = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password)
     } catch (error) {
       console.error('Error al iniciar sesión:', error)
     }
@@ -36,22 +47,29 @@ export default function Login () {
   }, [user, router])
 
   return (
-    <div className='flex-col h-screen w-auto space-x-10 m-auto mt-5'>
+    <div className='flex flex-col justify-center items-center h-screen w-auto space-x-10 m-auto pt-5'>
       {variants.map(variant => (
         <div
           key={variant}
-          className='flex w-full flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4'
+          className='flex w-full justify-center flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4'
         >
-          <Input type='email' variant={variant} label='Email' />
+          <Input
+            type='email'
+            variant={variant}
+            label='Email'
+            onChange={e => setEmail(e.target.value)}
+            className='mb-4 max-w-xs'
+          />
         </div>
       ))}
       <Input
         label='Password'
         variant='bordered'
-        placeholder='Enter your password'
+        placeholder='Ingresar contraseña'
+        onChange={e => setPassword(e.target.value)}
         endContent={
           <button
-            className='focus:outline-none'
+            className='focus:outline-none mb-7'
             type='button'
             onClick={toggleVisibility}
           >
@@ -65,7 +83,7 @@ export default function Login () {
         type={isVisible ? 'text' : 'password'}
         className='max-w-xs'
       />
-      <div >
+      <div className='mt-7 flex flex-row space-x-2 '>
         {loading ? (
           <Button
             isLoading
@@ -109,6 +127,20 @@ export default function Login () {
             </svg>
           </Button>
         )}
+        <Button
+          onClick={signIn}
+          color='primary'
+          variant='ghost'
+          className='mr-2'
+        >
+          Sign In
+        </Button>
+        <a href='/register'>
+          <Button color='primary' variant='ghost'>
+            Register
+          </Button>
+        </a>
+
         {error && <p>Error al iniciar sesión: {error.message}</p>}
       </div>
     </div>

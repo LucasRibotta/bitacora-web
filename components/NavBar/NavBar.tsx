@@ -3,6 +3,7 @@ import { usePathname } from 'next/navigation'
 import { auth } from '../../firebaseConfig'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useRouter } from 'next/navigation'
+import { signOut } from 'firebase/auth'
 
 import {
   Navbar,
@@ -19,7 +20,7 @@ export default function NavBar () {
 
   const logout = async () => {
     try {
-      await auth.signOut()
+      await signOut(auth)
       router.push('/')
     } catch (error) {
       console.error('Error al cerrar sesión', error)
@@ -27,21 +28,30 @@ export default function NavBar () {
   }
   const pathname = usePathname()
 
-  if (pathname !== '/' && pathname !== '/login' && pathname !== '/register' && pathname !== '/community') {
+  if (
+    pathname !== '/' &&
+    pathname !== '/login' &&
+    pathname !== '/register' 
+  ) {
     return (
       <Navbar>
         <NavbarBrand>
           <h2>LOGO</h2>
         </NavbarBrand>
         <NavbarContent className='hidden sm:flex gap-4' justify='center'>
-          <NavbarItem>
-            <Link color='foreground' href='/home'>
+          <NavbarItem isActive>
+            <Link href='/home' aria-current='page'>
               Inicio
             </Link>
           </NavbarItem>
           <NavbarItem isActive>
             <Link href='/form' aria-current='page'>
               Agregar nueva bitacora
+            </Link>
+          </NavbarItem>
+          <NavbarItem isActive>
+            <Link href='/community' aria-current='page'>
+              Comunidad
             </Link>
           </NavbarItem>
         </NavbarContent>

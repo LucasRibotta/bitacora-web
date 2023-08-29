@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import Card from '../Card/Card'
 
-export default function Community() {
+interface TypeCard {
+  tittle: string,
+  description: string,
+}
+
+export default function Community ({tittle, description}: TypeCard) {
+
+
   return (
-    <div>Community</div>
+    <div>
+      <h1>Comunidad</h1>
+    </div>
   )
 }
