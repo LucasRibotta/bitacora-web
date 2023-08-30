@@ -85,11 +85,6 @@ export default function RegistroUsuario () {
         <Button onClick={handleRegistro} color='primary' variant='ghost'>
           Registrarse
         </Button>
-        <a href='/login'>
-          <Button color='primary' variant='ghost'>
-            Login
-          </Button>
-        </a>
       </div>
     </div>
   )
