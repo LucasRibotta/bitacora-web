@@ -13,7 +13,7 @@ import {
 } from 'firebase/storage'
 import { v4 } from 'uuid'
 import { useRouter } from 'next/navigation'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+
 
 export default function Form() {
   const [newBitacoraTitle, setNewBitacoraTitle] = useState('')
@@ -27,7 +27,6 @@ export default function Form() {
   const [imageUpload, setImageUpload] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
   const [imagePrev, setImagePrev] = useState([]);
-  const [markerPosition, setMarkerPosition] = useState([0, 0])
   const router = useRouter()
 
 
@@ -41,6 +40,18 @@ export default function Form() {
   const bitacoraColecctionRef = collection(db, 'bitacoras')
 
   const onSubmitBitacora = async () => {
+    if (
+      !newBitacoraTitle.trim() ||
+      date === 0 ||
+      !description.trim() ||
+      !culture.trim() ||
+      !notes.trim() ||
+      activitys.length === 0 ||
+      imageUrls.length === 0
+    ) {
+      alert("Por favor completa todos los campos antes de enviar el formulario.");
+      return;
+    }
     try {
       await addDoc(bitacoraColecctionRef, {
         title: newBitacoraTitle,
@@ -69,7 +80,7 @@ export default function Form() {
       uploadBytes(imageRef, file).then((snapshot) => {
         getDownloadURL(snapshot.ref).then((url) => {
           setImageUrls((prev) => [...prev, url]);
-          setImagePrev((imagePrev)=> [...imagePrev, url])
+          setImagePrev((imagePrev) => [...imagePrev, url])
         });
       });
     });
@@ -197,19 +208,3 @@ export default function Form() {
 
   )
 }
-{/*    <MapContainer
-        center={markerPosition}
-        zoom={10}
-        style={{ height: '400px' }}
-        whenCreated={mapInstance => {
-          mapInstance.on('click', e => {
-            const { lat, lng } = e.latlng
-            setMarkerPosition([lat, lng])
-          })
-        }}
-      >
-        <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
-        <Marker position={markerPosition}>
-          <Popup>Coordenadas: {markerPosition.join(', ')}</Popup>
-        </Marker>
-      </MapContainer> */}

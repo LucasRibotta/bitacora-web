@@ -15,27 +15,36 @@ export default function HomeSection() {
   useEffect(() => {
     const getBitacoraList = async () => {
       try {
+        if (!auth.currentUser) {
+          console.log("Usuario no autenticado.");
+          return;
+        }
+
         const q = query(
           bitacoraCollectionRef,
           where('userId', '==', auth.currentUser.uid)
         );
+
+        console.log("Consulta:", q); 
+
         const dataBitacora = await getDocs(q);
         const filteredData = dataBitacora.docs.map(doc => ({
           ...doc.data(),
           id: doc.id,
         }));
-        setBitacoraList(filteredData);
 
+        console.log("Bitácoras filtradas:", filteredData); 
+
+        setBitacoraList(filteredData);
+        setLoading(false);
       } catch (error) {
         console.error(error);
-
+        setLoading(false);
       }
     };
 
-    if (auth.currentUser) {
-      getBitacoraList();
-    }
-  }, [auth.currentUser]);
+    getBitacoraList();
+  }, []);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-screen p-4">
