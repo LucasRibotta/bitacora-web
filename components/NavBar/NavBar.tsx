@@ -85,7 +85,7 @@ export default function NavBar () {
                   </svg>
                 }
               >
-                Loading
+                Cargando...
               </Button>
             )}
           </NavbarItem>

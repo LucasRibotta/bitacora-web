@@ -4,13 +4,13 @@ import { Button } from '@nextui-org/react'
 import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
 
 
-export default function CardHome({ id, userId, title, description, image }) {
+export default function CardHome({ id, userId, title, location, image }) {
 
   return (
     <Card className="py-4">
       <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
         <h1 className="text-tiny uppercase font-bold">{title}</h1>
-        <h4 className="font-bold text-large">{description}</h4>
+        <h4 className="font-bold text-large">{location}</h4>
       </CardHeader>
       <CardBody className="overflow-visible py-2">
         <img

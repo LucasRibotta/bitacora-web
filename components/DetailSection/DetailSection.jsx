@@ -24,18 +24,31 @@ function BitacoraDetail({ bitacora, setBitacoraList }) {
   };
 
   return (
-    <div className="border p-4 rounded-md shadow-md justify-center h-50 w-50 m-auto">
-      <h1 className="text-xl font-bold mb-2">{bitacora.title}</h1>
-      <p className="text-gray-600 mb-2">{bitacora.description}</p>
-      <p className="text-blue-500 mb-4">{bitacora.culture}</p>
+    <div className="bg-slate-50 border p-4 rounded-md shadow-md justify-center h-screen w-auto m-auto">
+      <h1 className="text-xl text-green-600 font-bold mb-2">{bitacora.title}</h1>
+      <p className="text-lime-500 font-semibold mb-2">{bitacora.description}</p>
+      <p className="text-lime-700 font-semibold mb-4">{bitacora.culture}</p>
       <div className="mb-4">
-        <h2 className="font-semibold mb-1">Notes:</h2>
+        <h2 className="font-semibold mb-1 underline">Notas:</h2>
         <p>{bitacora.notes}</p>
-        <h2 className="font-semibold mt-2 mb-1">Activity:</h2>
-        <p>{bitacora.activitys}</p>
+        <h2 className="font-semibold my-3 underline">Actividades:</h2>
+        <div className="grid grid-cols-2 gap-2">
+          {bitacora.activitys.map((activity, index) => (
+            <p key={index} className="text-gray-600">
+              {activity}
+            </p>
+          ))}
+        </div>
       </div>
-      <div className="flex justify-center">
-        <img src={bitacora.image} alt="img" className="w-[350px] h-[300px]" />
+      <div className="grid grid-cols-4 gap-4 justify-center">
+        {bitacora.image.map((imageUrl, index) => (
+          <img
+            key={index}
+            src={imageUrl}
+            alt={`Image ${index}`}
+            className="w-full h-[300px] object-cover rounded"
+          />
+        ))}
       </div>
       <div className="mt-4 flex justify-center">
         <button
@@ -74,7 +87,7 @@ export default function DetailSection() {
 
 
   return (
-    <div className="flex flex-wrap gap-4 h-screen">
+    <div className="flex flex-wrap gap-4 min-h-screen">
       {bitacoraList.map((bitacora) => (
         <BitacoraDetail key={bitacora.id} bitacora={bitacora} />
       ))}

@@ -28,6 +28,14 @@ Recuerda siempre mantener tus cinturones de seguridad emocionales abrochados y d
 
 [Visita BitácorApp](https://bitacora-web.vercel.app/)
 
-USUARIO DE PRUEBA:
+## USUARIO DE PRUEBA:
 LOGIN: prueba@prueba.com
 PASSWORD: prueba123
+
+**Proximos Avances **
+Integración de Mapa.
+Integración de Chat.
+Comunidad y comentarios.
+Renderizado de videos.
+Editar bitácora.
+Confirmación por sms o e-mail para autenticación. 
