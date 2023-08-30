@@ -51,11 +51,6 @@ export default function NavBar () {
               Añadir
             </Link>
           </NavbarItem>
-          <NavbarItem isActive = {pathname === '/community' && true}>
-            <Link color="success" href='/community' aria-current='page'>
-              Comunidad
-            </Link>
-          </NavbarItem>
         </NavbarContent>
         <NavbarContent justify='end'>
           <NavbarItem className='hidden lg:flex'>
