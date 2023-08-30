@@ -141,18 +141,15 @@ export default function Form() {
               placeholder='Ubicación'
               onChange={e => setLocation(e.target.value)}
             />
-            <input
-              type='text'
+            <textarea
               placeholder='Descripción'
               onChange={e => setDescription(e.target.value)}
             />
-            <input
-              type='text'
+            <textarea
               placeholder='Cultura'
               onChange={e => setCulture(e.target.value)}
             />
-            <input
-              type='text'
+            <textarea
               placeholder='Notes'
               onChange={e => setNotes(e.target.value)}
             />
