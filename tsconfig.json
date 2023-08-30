@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/Community/Community.tsx", "components/Card/Card.jsx", "components/DetailSection/DetailSection.jsx", "components/Mapa/Mapa.tsx", "components/HomeSection/HomeSection.jsx", "components/Form/Form.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/Community/Community.jsx", "components/Card/Card.jsx", "components/DetailSection/DetailSection.jsx", "components/Mapa/Mapa.tsx", "components/HomeSection/HomeSection.jsx", "components/Form/Form.jsx"],
   "exclude": ["node_modules"]
 }

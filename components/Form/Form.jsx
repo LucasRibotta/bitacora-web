@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from 'react'
 import { Button } from '@nextui-org/react'
@@ -23,8 +24,9 @@ export default function Form() {
   const [newActivity, setNewActivity] = useState('')
   const [activitys, setActivitys] = useState([])
   const [successMessage, setSuccessMessage] = useState(false)
-  const [imageUpload, setImageUpload] = useState(null);
+  const [imageUpload, setImageUpload] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
+  const [imagePrev, setImagePrev] = useState([]);
   const [markerPosition, setMarkerPosition] = useState([0, 0])
   const router = useRouter()
 
@@ -48,11 +50,11 @@ export default function Form() {
         culture: culture,
         notes: notes,
         activitys: activitys,
-        image: imageUpload,
+        image: imageUrls,
         userId: auth?.currentUser?.uid
       })
       setSuccessMessage(true)
-      router.push('/home') 
+      router.push('/home')
     } catch (error) {
       console.error(error)
     }
@@ -67,6 +69,7 @@ export default function Form() {
       uploadBytes(imageRef, file).then((snapshot) => {
         getDownloadURL(snapshot.ref).then((url) => {
           setImageUrls((prev) => [...prev, url]);
+          setImagePrev((imagePrev)=> [...imagePrev, url])
         });
       });
     });
@@ -82,7 +85,7 @@ export default function Form() {
 
       return () => clearTimeout(timeout)
     }
-      
+
   }, [successMessage, router])
 
   useEffect(() => {
@@ -92,8 +95,7 @@ export default function Form() {
           setImageUrls((prev) => [...prev, url]);
         });
       });
-    });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    })
   }, [])
 
   return (
@@ -185,7 +187,7 @@ export default function Form() {
       </div>
       <div className='flex flex-col items-center md:items-start md:mt-8'>
         <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
-          {imageUrls.map(url => (
+          {imagePrev.map(url => (
             <img key={url} src={url} height={70} width={100} alt='image' />
           ))}
         </div>

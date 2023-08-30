@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+'use client'
 import React from 'react'
 import { usePathname } from 'next/navigation'
 import { auth } from '../../firebaseConfig'
@@ -36,21 +38,21 @@ export default function NavBar () {
     return (
       <Navbar>
         <NavbarBrand>
-          <h2>LOGO</h2>
+          <img src="https://i.pinimg.com/564x/0a/8d/ed/0a8ded582de4212321da4427900bd39b.jpg" alt="logo" width={60} height={90}/>
         </NavbarBrand>
         <NavbarContent className='hidden sm:flex gap-4' justify='center'>
-          <NavbarItem isActive>
-            <Link href='/home' aria-current='page'>
-              Inicio
+          <NavbarItem isActive = {pathname === '/home' && true}>
+            <Link color="success" href='/home' aria-current='page'>
+              Mis Bitácoras
             </Link>
           </NavbarItem>
-          <NavbarItem isActive>
-            <Link href='/form' aria-current='page'>
-              Agregar nueva bitacora
+          <NavbarItem  isActive = {pathname === '/form' && true}>
+            <Link color="success" href='/form' aria-current='page'>
+              Añadir
             </Link>
           </NavbarItem>
-          <NavbarItem isActive>
-            <Link href='/community' aria-current='page'>
+          <NavbarItem isActive = {pathname === '/community' && true}>
+            <Link color="success" href='/community' aria-current='page'>
               Comunidad
             </Link>
           </NavbarItem>

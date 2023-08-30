@@ -1,16 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import { Button } from '@nextui-org/react'
+import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
 
 
-export default function CardHome ({id, userId, title, description, image}) {
+export default function CardHome({ id, userId, title, description, image }) {
 
   return (
-    <div className='max-w-sm rounded overflow-hidden shadow-lg'>
-      <h1>{title}</h1>
-      <p>{description}</p>
-      <img src={image} alt="Imagen" />
-      <div className='pt-3 m-auto justify-end items-end'>
+    <Card className="py-4">
+      <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+        <h1 className="text-tiny uppercase font-bold">{title}</h1>
+        <h4 className="font-bold text-large">{description}</h4>
+      </CardHeader>
+      <CardBody className="overflow-visible py-2">
+        <img
+          alt="img"
+          className="object-cover rounded-xl"
+          src={image}
+          width={270}
+        />
+      </CardBody>
+      <div className="flex justify-center py-4">
         <a href='/detail'>
           <Button
             radius='full'
@@ -20,6 +30,6 @@ export default function CardHome ({id, userId, title, description, image}) {
           </Button>
         </a>
       </div>
-    </div>
+    </Card>
   )
 }

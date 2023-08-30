@@ -45,7 +45,7 @@ export default function DetailSection() {
           </div>
 
           <div>
-            <img src={bitacora.multimedia} alt="img" />
+            <img  src={bitacora.image} alt="img" width={30} height={50}/>
           </div>
 
           <div>
