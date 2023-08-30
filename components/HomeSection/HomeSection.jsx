@@ -47,7 +47,7 @@ export default function HomeSection() {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-screen p-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-screen p-4 bg-slate-50">
       {bitacoraList.length === 0 ? (
         <div className="border rounded-lg p-4 text-center">
           <img

@@ -111,7 +111,7 @@ export default function Form() {
   }, [])
 
   return (
-    <div className='flex h-screen w-auto justify-center items-center'>
+    <div className='flex h-screen w-auto bg-slate-50 justify-center items-center'>
       <div className='w-1/2 mr-5'>
         <h1 className='mb-5 text-2xl font-bold'>Crear Nueva Bitácora</h1>
         <form className='flex flex-col'>
