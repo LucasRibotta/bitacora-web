@@ -19,6 +19,7 @@ export default function Form() {
   const [newBitacoraTitle, setNewBitacoraTitle] = useState('')
   const [date, setDate] = useState(0)
   const [description, setDescription] = useState('')
+  const [location, setLocation] = useState('')
   const [culture, setCulture] = useState('')
   const [notes, setNotes] = useState('')
   const [newActivity, setNewActivity] = useState('')
@@ -56,7 +57,7 @@ export default function Form() {
       await addDoc(bitacoraColecctionRef, {
         title: newBitacoraTitle,
         date: date,
-        location: markerPosition,
+        location: location,
         description: description,
         culture: culture,
         notes: notes,
@@ -135,6 +136,11 @@ export default function Form() {
               setLongitude(parseFloat(lng))
             }}
           /> */}
+            <input
+              type='text'
+              placeholder='Ubicación'
+              onChange={e => setLocation(e.target.value)}
+            />
             <input
               type='text'
               placeholder='Descripción'
