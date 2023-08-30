@@ -1,10 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from 'react';
 import { db, auth } from '../../firebaseConfig';
 import { getDocs, collection, query, where } from 'firebase/firestore';
 import CardHome from '../Card/Card';
 import { Button } from '@nextui-org/react';
-import { CircularProgress } from "@nextui-org/react";
 
 export default function HomeSection() {
   const [bitacoraList, setBitacoraList] = useState([]);
@@ -25,23 +25,21 @@ export default function HomeSection() {
           id: doc.id,
         }));
         setBitacoraList(filteredData);
-        setLoading(false);
+
       } catch (error) {
         console.error(error);
-        setLoading(false);
+
       }
     };
 
     if (auth.currentUser) {
       getBitacoraList();
     }
-  }, []);
+  }, [auth.currentUser]);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-screen p-4">
-      {loading ? (
-        <CircularProgress label="Loading..." />
-      ) : bitacoraList.length === 0 ? (
+      {bitacoraList.length === 0 ? (
         <div className="border rounded-lg p-4 text-center">
           <img
             src="https://i.pinimg.com/564x/c8/bf/e0/c8bfe06a152bc6a6611182c26f719e84.jpg"
@@ -66,6 +64,5 @@ export default function HomeSection() {
         ))
       )}
     </div>
-
   );
 }

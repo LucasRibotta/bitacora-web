@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebaseConfig';
 import { getDocs, collection } from 'firebase/firestore';
@@ -15,7 +16,7 @@ export default function Community() {
         const dataBitacora = await getDocs(bitacoraCollectionRef);
         const promises = dataBitacora.docs.map(async doc => {
           const bitacoraData = doc.data();
-          const imageURLs = bitacoraData.image || []; 
+          const imageURLs = bitacoraData.image || [];
           const imageDownloadURLs = await Promise.all(imageURLs.map(async url => {
             return url;
           }));
