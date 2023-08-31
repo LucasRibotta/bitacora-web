@@ -42,9 +42,9 @@ export default function Login () {
 
   useEffect(() => {
     if (user) {
-      router.push('/home')
+      router.push('/home');
     }
-  }, [user, router])
+  }, [user, router]);
 
   return (
     <div className='flex flex-col justify-center items-center h-screen w-auto space-x-10 m-auto pt-5'>
