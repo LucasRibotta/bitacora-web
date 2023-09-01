@@ -75,10 +75,12 @@ export default function DetailSection() {
             />
           ))}
         </div>
+        <div className='flex w-50 m-auto py-5 justify-center items-center'>
+          <Button color="danger" onClick={handleDelete}>
+            Eliminar Bitácora
+          </Button>
+        </div>
       </div>
-      <Button className='flex justify-center items-center' color="danger" onClick={handleDelete}>
-        Eliminar Bitácora
-      </Button>
     </div>
   );
 }
