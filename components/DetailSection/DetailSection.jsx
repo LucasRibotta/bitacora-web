@@ -87,4 +87,35 @@ export default function DetailSection() {
       ))}
     </div>
   );
-}
+} 
+
+/* import React, {useState} from 'react'
+import { db } from '../../firebaseConfig';
+import { useParams, usePathname, useRouter } from 'next/navigation'
+import { getDocs, collection, deleteDoc, doc } from 'firebase/firestore';
+
+
+export default function DetailSection() {
+  const [data, setData] = useState()
+  const params = useParams()
+
+  const getBitacora = async (id) => {
+    try {
+      const bitacoraDoc = await doc(db, "bitacoras", id);
+      setData(bitacoraDoc)
+
+    } catch (error) {
+      alert('Error en la bitacora')
+    }
+  }
+
+
+
+
+  return (
+    <div>
+
+
+    </div>
+  )
+} */
