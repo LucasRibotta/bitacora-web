@@ -65,6 +65,7 @@ export default function HomeSection() {
         bitacoraList.map(bitacora => (
           <div className="px-6 py-4" key={bitacora.id}>
             <CardHome
+              id={bitacora.id}
               title={bitacora.title}
               description={bitacora.description}
               image={bitacora.image}
