@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from 'react';
 import { db, auth } from '../../firebaseConfig';
@@ -9,7 +10,7 @@ export default function HomeSection() {
   const [bitacoraList, setBitacoraList] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const bitacoraCollectionRef = collection(db, 'bitacoras-web');
+  const bitacoraCollectionRef = collection(db, 'bitacoras');
 
   useEffect(() => {
     const getBitacoraList = async () => {
@@ -66,7 +67,7 @@ export default function HomeSection() {
             <CardHome
               title={bitacora.title}
               description={bitacora.description}
-              image={bitacora.image} 
+              image={bitacora.image}
             />
           </div>
         ))
