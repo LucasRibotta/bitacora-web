@@ -12,17 +12,6 @@ export default function DetailSection() {
 
   const info = data && data.find(el => el.id === params.id)
 
-
-  const getBitacora = async (id) => {
-    try {
-      const bitacoraDoc = await doc(db, "bitacoras", params.id);
-      setData(bitacoraDoc)
-
-    } catch (error) {
-      alert('Error en la bitacora')
-    }
-  }
-
   const bitacoraCollectionRef = collection(db, "bitacoras");
 
   useEffect(() => {
@@ -43,10 +32,10 @@ export default function DetailSection() {
 
 
   return (
-    <div className="flex flex-wrap gap-4 min-h-screen">
+    <div className="flex flex-wrap gap-4 min-h-screen bg-slate-50">
 
         <div
-          key={info.id}
+          key={info?.id}
           className="bg-slate-50 border p-4 rounded-md shadow-md justify-center h-screen w-auto m-auto"
         >
           <h1 className="text-xl text-green-600 font-bold mb-2">{info?.title}</h1>
@@ -73,14 +62,6 @@ export default function DetailSection() {
                 className="w-full h-[300px] object-cover rounded"
               />
             ))}
-          </div>
-          <div className="mt-4 flex justify-center">
-            <button
-              className="bg-red-500 text-white py-2 px-4 rounded mr-2"
-              onClick={() => deleteBitacora(bitacora.id)}
-            >
-              Eliminar Bitácora
-            </button>
           </div>
         </div>
     </div>
