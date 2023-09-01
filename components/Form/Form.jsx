@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { Button } from '@nextui-org/react'
 import { db, auth, storage } from '@/firebaseConfig'
 import { addDoc, collection } from 'firebase/firestore'
+import { v4 as uuidv4 } from 'uuid';
 import {
   ref,
   uploadBytes,
@@ -11,12 +12,13 @@ import {
   listAll,
   list
 } from 'firebase/storage'
-import { v4 } from 'uuid'
+import UploadImg from '../UploadImg/UploadImg';
 import { useRouter } from 'next/navigation'
 
 
 export default function Form() {
   const [newBitacoraTitle, setNewBitacoraTitle] = useState('')
+  const [id, setId] = useState('');
   const [date, setDate] = useState(0)
   const [description, setDescription] = useState('')
   const [location, setLocation] = useState('')
@@ -38,7 +40,7 @@ export default function Form() {
     }
   }
 
-  const bitacoraColecctionRef = collection(db, 'bitacoras')
+  const bitacoraColecctionRef = collection(db, 'bitacoras-web')
 
   const onSubmitBitacora = async () => {
     if (
@@ -54,7 +56,10 @@ export default function Form() {
       return;
     }
     try {
+      const newId = uuidv4();
+      setId(newId);
       await addDoc(bitacoraColecctionRef, {
+        id: newId,
         title: newBitacoraTitle,
         date: date,
         location: location,
@@ -72,21 +77,8 @@ export default function Form() {
     }
   }
 
-  const imagesListRef = ref(storage, "imagesBitacoras/");
-  const uploadFiles = () => {
-    if (imageUpload.length === 0) return;
-
-    imageUpload.forEach((file) => {
-      const imageRef = ref(storage, `imagesBitacoras/${file.name + v4()}`);
-      uploadBytes(imageRef, file).then((snapshot) => {
-        getDownloadURL(snapshot.ref).then((url) => {
-          setImageUrls((prev) => [...prev, url]);
-          setImagePrev((imagePrev) => [...imagePrev, url])
-        });
-      });
-    });
-
-    setImageUpload([]);
+  const onImageUpload = (uploadedImageUrls) => {
+    setImageUrls(uploadedImageUrls); 
   };
 
   useEffect(() => {
@@ -100,15 +92,6 @@ export default function Form() {
 
   }, [successMessage, router])
 
-  useEffect(() => {
-    listAll(imagesListRef).then((response) => {
-      response.items.forEach((item) => {
-        getDownloadURL(item).then((url) => {
-          setImageUrls((prev) => [...prev, url]);
-        });
-      });
-    })
-  }, [])
 
   return (
     <div className='flex h-screen w-auto bg-lime-200 justify-center items-center'>
@@ -171,7 +154,7 @@ export default function Form() {
             </ul>
           </div>
 
-          <input
+          {/* <input
             type='file'
             placeholder='Imagenes'
             multiple
@@ -196,16 +179,17 @@ export default function Form() {
           </Button>
           <Button className='mt-4' color='success' variant='shadow' onClick={onSubmitBitacora}>
             Enviar
-          </Button>
+          </Button> */}
+          <UploadImg parentId={id} onImageUpload={onImageUpload} />
         </form>
       </div>
-      <div className='flex flex-col items-center md:items-start md:mt-8'>
+      {/* <div className='flex flex-col items-center md:items-start md:mt-8'>
         <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
           {imagePrev.map(url => (
             <img key={url} src={url} height={70} width={100} alt='image' />
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
 
 
