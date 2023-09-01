@@ -33,7 +33,6 @@ export default function DetailSection() {
 
   return (
     <div className="flex flex-wrap gap-4 min-h-screen bg-slate-50">
-
         <div
           key={info?.id}
           className="bg-slate-50 border p-4 rounded-md shadow-md justify-center h-screen w-auto m-auto"
