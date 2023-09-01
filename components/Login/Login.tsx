@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button } from '@nextui-org/react'
+import {Button} from '@nextui-org/react'
 import { Input } from '@nextui-org/react'
 import { auth, googleAuthProvider } from '../../firebaseConfig'
 import { EyeFilledIcon } from './password/EyeFilledIcon.jsx'

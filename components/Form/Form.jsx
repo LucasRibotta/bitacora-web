@@ -62,7 +62,7 @@ export default function Form() {
         culture: culture,
         notes: notes,
         activitys: activitys,
-        image: imageUrls,
+        image: imagePrev,
         userId: auth?.currentUser?.uid
       })
       setSuccessMessage(true)
